@@ -7,6 +7,63 @@
     <title>Game</title>
   </head>
   <body>
+    <main>
+      <!-- first screen: loading screen -->
+      <section class="loading-screen">
+        <h1 class="loading-screen__heading">Welcome to Game Name!</h1>
+        <p class="loading-screen__description">Description. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <button class="loading-screen__button">Enter!</button>
+      </section>
+
+      <!-- second screen: selection screen -->
+      <section class="selection-screen">
+        <label for="name">Input Name:</label>
+        <input type="text" name="username" id="name">
+        <h2>Select your fighter:</h2>
+        <div class="character-selection"> 
+          <!-- need to figure out how to make buttons flip through the various images -->
+        <button class="character-selection__left-arrow character-selection__left-arrow--click">Left arrow</button>
+        <img class="character-selection__character-img" src="" alt="">
+        <img class="character-selection__character-img" src="" alt="">
+        <img class="character-selection__character-img" src="" alt="">
+        <img class="character-selection__character-img" src="" alt="">
+        <img class="character-selection__character-img" src="" alt="">
+        <img class="character-selection__character-img" src="" alt="">
+        <button class="character-selection__right-arrow character-selection__right-arrow--click">Right arrow</button>
+        </div>
+      </section>
+
+      <!-- third screen: game screen -->
+      <section class="game-screen">
+        <div class="character">
+          <div class="character__stats">
+            <div class="character__stats__hp"> <h3>Health:</h3> <h4></h4> </div>
+            <div class="character__stats__stamina"><h3>Stamina:</h3> <h4></h4> </div>
+            <div class="character__stats__score"><h3>Score:</h3> <h4></h4> </div>
+          </div>
+          <div class="character__info">
+            <img class="character__info__img" src="" alt="">
+            <h1 class="chracter__info__name"></h1>
+          </div>
+          <div class="character__actions">
+            <button class="character__actions__atk">Attack</button>
+            <button class="character__actions__rest">Rest</button>
+            <button class="character__actions__heal">Heal</button>
+
+          </div>
+        </div>
+        <div class="enemy"></div>
+        <div class="enemy__stats"> 
+          <div class="enemy__stats__hp"> <h3>Health:</h3> <h4></h4> </div>
+        </div>
+          <div class="enemy__info">
+            <img class="enemy__info__img" src="" alt="">
+            <h1 class="enemy__info__name"></h1>
+          </div>
+      </section>
+
+      <!-- will probably need 4th screen for end of game: won and 5th screen for end of game: lost -->
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
