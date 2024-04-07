@@ -13,6 +13,31 @@
   font-size: 40px;
 }
 
+.selection-screen {
+  flex-direction: column;
+  font-size: 40px;
+}
+.selection-screen__character-selection {
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+}
+.selection-screen__character-selection__left-arrow, .selection-screen__character-selection__right-arrow {
+  font-size: 30px;
+}
+.selection-screen__button {
+  font-size: 30px;
+}
+
+.game-screen {
+  font-size: 30px;
+}
+
+.character__stats {
+  display: flex;
+  flex-direction: row;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -25,5 +50,5 @@
 }
 
 .show {
-  display: block;
+  display: flex;
 }/*# sourceMappingURL=style.css.map */
