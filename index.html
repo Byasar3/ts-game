@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game</title>
+    <link rel="stylesheet" href="./styles/style.css">
   </head>
   <body>
     <main>
@@ -12,7 +13,7 @@
       <section class="loading-screen">
         <h1 class="loading-screen__heading">Welcome to Game Name!</h1>
         <p class="loading-screen__description">Description. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <button class="loading-screen__button">Enter!</button>
+        <button class="loading-screen__button ">Enter!</button>
       </section>
 
       <!-- second screen: selection screen -->
@@ -31,6 +32,7 @@
         <img class="character-selection__character-img" src="" alt="">
         <button class="character-selection__right-arrow character-selection__right-arrow--click">Right arrow</button>
         </div>
+        <button class="selection-screen__button">Start Battle!</button>
       </section>
 
       <!-- third screen: game screen -->
@@ -64,6 +66,6 @@
 
       <!-- will probably need 4th screen for end of game: won and 5th screen for end of game: lost -->
     </main>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="./src/main.ts"></script>
   </body>
 </html>

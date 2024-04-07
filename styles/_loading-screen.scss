@@ -1,0 +1,20 @@
+@use "./variables" as *;
+
+.selection-screen, .game-screen {
+  display: none;
+}
+
+.loading-screen {
+	&__heading {
+		font-size: $large-font;
+	}
+
+	&__description {
+		font-size: $medium-font;
+	}
+
+	&__button {
+		font-size: $large-font;
+	}
+
+}

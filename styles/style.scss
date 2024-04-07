@@ -1,0 +1,21 @@
+@use "./variables" as *;
+@use "./loading-screen";
+@use "./selection-screen";
+@use "./game-screen";
+@use "./end-game-won";
+@use "./end-game-lost";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: $main-font;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}

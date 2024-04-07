@@ -1,1 +1,29 @@
-/*# sourceMappingURL=style.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Micro+5&display=swap");
+.selection-screen, .game-screen {
+  display: none;
+}
+
+.loading-screen__heading {
+  font-size: 40px;
+}
+.loading-screen__description {
+  font-size: 30px;
+}
+.loading-screen__button {
+  font-size: 40px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Micro 5", sans-serif;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}/*# sourceMappingURL=style.css.map */
