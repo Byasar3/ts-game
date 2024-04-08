@@ -1,3 +1,4 @@
+console.log("Character module loaded"); 
 // creating character aliase/interface/object
 export type Character = {
   name: string;
@@ -17,3 +18,6 @@ export const player1: Character = {
   img: "", // will be based on user input
   isAlive: true,
 };
+
+console.log("player1:", player1);
+
