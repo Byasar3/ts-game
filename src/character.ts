@@ -5,7 +5,7 @@ export type Character = {
   hp: number;
   stamina: number;
   score: number;
-  img: "";
+  img: string;
   isAlive: boolean;
 };
 
