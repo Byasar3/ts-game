@@ -55,9 +55,9 @@ const handleRightArrowClick = () => {
 const showCurrentImage = () => {
 	characterImages.forEach((image, index) => {
 		if (index === currentIndex) {
-			(image as HTMLImageElement).src =`./assets/fighter${currentIndex + 1}.png`
+			(image as HTMLImageElement).style.display = "block"
 		} else {
-			(image as HTMLImageElement).src =``;
+			(image as HTMLImageElement).style.display = "none"
 		}
 	})
 }
