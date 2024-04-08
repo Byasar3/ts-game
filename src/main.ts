@@ -39,6 +39,30 @@ const handleInput = (event : Event) => {
 	player1.name = target;
 }
 
+let currentIndex = 0
+const handleLeftArrowClick = () => {
+	currentIndex = (currentIndex - 1 + characterImages.length) % characterImages.length
+	showCurrentImage()
+}
+
+const handleRightArrowClick = () => {
+	currentIndex = (currentIndex + 1) % characterImages.length
+	showCurrentImage()
+}
+
+// ---------------- FUNCTIONS ----------------- // 
+
+const showCurrentImage = () => {
+	characterImages.forEach((image, index) => {
+		if (index === currentIndex) {
+			(image as HTMLImageElement).src =`./assets/fighter${currentIndex + 1}.png`
+		} else {
+			(image as HTMLImageElement).src =``;
+		}
+	})
+}
+// want it load with only
+showCurrentImage()
 // ---------------- EVENT LISTENERS ---------- // 
 
 // FOR LOADING SCREEN
@@ -57,10 +81,14 @@ selectionScreenBtn?.addEventListener("click", () => {
 	// show game screen
 	gameScreen?.classList.add("show")
 })
+
 nameInputBox?.addEventListener("input", handleInput)
 
 submitChoicesButton?.addEventListener("click", inputUserChoices)
 
+leftArrow?.addEventListener("click", handleLeftArrowClick)
+
+rightArrow?.addEventListener("click", handleRightArrowClick)
 
 
 
