@@ -1,9 +1,5 @@
 import { player1 } from "./character";
 
-// entry point of application.
-// import and initialise game
-// manage trasnsitions between difference screens
-
 // --------------- QUERY SELECTORS ---------- //
 
 // FOR LOADING SCREEN:
@@ -13,6 +9,9 @@ const selectionScreen = document.querySelector(".selection-screen");
 const gameScreen = document.querySelector(".game-screen");
 const loadingScreenEnterBtn = document.querySelector(".loading-screen__button");
 const selectionScreenBtn = document.querySelector(".selection-screen__button");
+const characterHealth = document.querySelector(".character__stats__hp__amount");
+const characterStamina = document.querySelector(".character__stats__stamina__amount");
+const characterScore = document.querySelector(".character__stats__score__amount");
 
 // FOR SELECTION SCREEN:
 
@@ -48,10 +47,17 @@ if (
   !leftArrow ||
   !rightArrow ||
   !submitChoicesButton ||
-  !characterInfoDiv
+  !characterInfoDiv ||
+  !characterHealth ||
+  !characterStamina ||
+  !characterScore
 ) {
   throw new Error("Issue with selectors");
 }
+// ---------------- VARIABLES ------------------//
+let currentCharacterHealth = toString(player1.hp);
+characterHealth.innerHTML = currentCharacterHealth;
+
 
 // ---------------- EVENT HANDLERS ----------- //
 
@@ -98,7 +104,8 @@ const handleNameInput = (event: Event) => {
 
 
 // ---------------- FUNCTIONS ----------------- //
-// setting name and creating html element
+
+
 
 // clicking through images
 const showCurrentImage = () => {
