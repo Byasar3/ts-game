@@ -1,4 +1,5 @@
 import { player1 } from "./character";
+import "../styles/style.scss"
 
 // --------------- QUERY SELECTORS ---------- //
 
@@ -55,8 +56,8 @@ if (
   throw new Error("Issue with selectors");
 }
 // ---------------- VARIABLES ------------------//
-let currentCharacterHealth = toString(player1.hp);
-characterHealth.innerHTML = currentCharacterHealth;
+// let currentCharacterHealth = toString(player1.hp);
+// characterHealth.innerHTML = currentCharacterHealth;
 
 
 // ---------------- EVENT HANDLERS ----------- //
