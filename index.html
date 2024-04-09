@@ -10,8 +10,8 @@
   <body>
     <main>
       <!-- first screen: loading screen -->
-      <section class="loading-screen">
-        <h1 class="loading-screen__heading">Welcome to Game Name!</h1>
+      <section class="loading-screen show">
+        <h1 class="loading-screen__heading">Welcome to the Realm of Inner Demons!</h1>
         <p class="loading-screen__description">
           Description. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
         </p>
@@ -19,7 +19,7 @@
       </section>
 
       <!-- second screen: selection screen -->
-      <section class="selection-screen">
+      <section class="selection-screen hide">
         <label for="name" class="selection-screen__name-input">Input Name:</label>
         <input
           type="text"
@@ -27,7 +27,7 @@
           id="name"
           class="selection-screen__name-input-box"
         />
-        <h2 class="selection-screen__chose-fighter">Select your fighter:</h2>
+        <h2 class="selection-screen__choose-fighter">Select your fighter:</h2>
         <div class="selection-screen__character-selection">
           <!-- need to figure out how to make buttons flip through the various images -->
           <button
@@ -51,7 +51,19 @@
       </section>
 
       <!-- third screen: game screen -->
-      <section class="game-screen">
+      <section class="game-screen hide">
+        <div class="enemy">
+          <div class="enemy__stats">
+            <div class="enemy__stats__hp">
+              <h3>Health:</h3>
+              <h4></h4>
+            </div>
+          </div>
+          <div class="enemy__info">
+            <img class="enemy__info__img" src="" alt="" />
+            <h1 class="enemy__info__name"></h1>
+          </div>
+        </div>  
         <div class="character">
           <div class="character__stats">
             <div class="character__stats__hp">
@@ -75,17 +87,7 @@
             <button class="character__actions__heal">Heal</button>
           </div>
         </div>
-        <div class="enemy"></div>
-        <div class="enemy__stats">
-          <div class="enemy__stats__hp">
-            <h3>Health:</h3>
-            <h4></h4>
-          </div>
-        </div>
-        <div class="enemy__info">
-          <img class="enemy__info__img" src="" alt="" />
-          <h1 class="enemy__info__name"></h1>
-        </div>
+      </div>
       </section>
 
       <!-- will probably need 4th screen for end of game: won and 5th screen for end of game: lost -->

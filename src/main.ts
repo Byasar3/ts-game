@@ -56,35 +56,6 @@ if (
 // ---------------- EVENT HANDLERS ----------- //
 
 // FOR SELECTION SCREEN
-const inputUserChoices = () => {
-  const currentImage = characterImages[currentIndex] as HTMLImageElement;
-  player1.img = currentImage.src;
-  console.log(player1.img);
-
-  // creating a html element to store img on
-  const characterImg = document.createElement("img");
-  // adding class name to element
-  characterImg.classList.add("character__info__img");
-  // using this info to update user's img on game screen
-  characterImg.src = player1.img;
-  characterImg.alt = "Character image";
-  // adding this element to the div 
-  characterInfoDiv.appendChild(characterImg);
-};
-
-const handleInput = (event: Event) => {
-  const target = (event.target as HTMLInputElement).value;
-  player1.name = target;
-  // creating a html element to store name on
-  const characterName = document.createElement("h1");
-  // adding class name to element
-  characterName.classList.add("character__info__name");
-  // using this info to update user's name on game screen
-  characterName.textContent = player1.name;
-  // adding this element to the div
-  characterInfoDiv.appendChild(characterName);
-};
-
 let currentIndex = 0;
 const handleLeftArrowClick = () => {
   currentIndex =
@@ -97,8 +68,39 @@ const handleRightArrowClick = () => {
   showCurrentImage();
 };
 
-// ---------------- FUNCTIONS ----------------- //
+const handleUserInputs = () => {
+  const currentImage = characterImages[currentIndex] as HTMLImageElement;
+  player1.img = currentImage.src;
+  // creating a html element to store img on
+  const characterImg = document.createElement("img");
+  // adding class name to element
+  characterImg.classList.add("character__info__img");
+  // using this info to update user's img on game screen
+  characterImg.src = player1.img;
+  characterImg.alt = "Character image";
+  // adding this element to the div
+  characterInfoDiv.appendChild(characterImg);
 
+  // creating a html element to store name on
+  const characterName = document.createElement("h1");
+  // adding class name to element
+  characterName.classList.add("character__info__name");
+  // using this info to update user's name on game screen
+  characterName.textContent = player1.name;
+  // adding this element to the div
+  characterInfoDiv.appendChild(characterName);
+};
+
+const handleNameInput = (event: Event) => {
+  const target = (event.target as HTMLInputElement).value;
+  player1.name = target;
+};
+
+
+// ---------------- FUNCTIONS ----------------- //
+// setting name and creating html element
+
+// clicking through images
 const showCurrentImage = () => {
   characterImages.forEach((image, index) => {
     if (index === currentIndex) {
@@ -111,31 +113,41 @@ const showCurrentImage = () => {
 // want it load with only one image
 showCurrentImage();
 
+// screen transitions
+const loadSelectionScreen = () => {
+  // hide loading screen and game screen
+  loadingScreen.classList.remove("show");
+  loadingScreen.classList.add("hide");
+
+  // show selection screen
+  selectionScreen.classList.remove("hide");
+  selectionScreen.classList.add("show");
+};
+
+const loadGameScreen = () => {
+  // hide selection screen
+  selectionScreen.classList.remove("show");
+  selectionScreen.classList.add("hide");
+
+  // show game screen
+  gameScreen.classList.remove("hide");
+  gameScreen.classList.add("show");
+};
 // ---------------- EVENT LISTENERS ---------- //
 
 // FOR LOADING SCREEN
-loadingScreenEnterBtn?.addEventListener("click", () => {
-  // hide loading screen
-  loadingScreen?.classList.add("hide");
-  // show selection screen
-  selectionScreen?.classList.add("show");
-});
+loadingScreenEnterBtn.addEventListener("click", loadSelectionScreen);
 
 // FOR SELECTION SCREEN
-selectionScreenBtn?.addEventListener("click", () => {
-  // hide selection screen
-  selectionScreen?.classList.remove("show");
-  // show game screen
-  gameScreen?.classList.add("show");
-});
+selectionScreenBtn.addEventListener("click", loadGameScreen);
 
-nameInputBox?.addEventListener("input", handleInput);
+nameInputBox.addEventListener("change", handleNameInput);
 
-submitChoicesButton?.addEventListener("click", inputUserChoices);
+submitChoicesButton.addEventListener("click", handleUserInputs);
 
-leftArrow?.addEventListener("click", handleLeftArrowClick);
+leftArrow.addEventListener("click", handleLeftArrowClick);
 
-rightArrow?.addEventListener("click", handleRightArrowClick);
+rightArrow.addEventListener("click", handleRightArrowClick);
 
 ////////////////// NOTES
 
