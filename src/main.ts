@@ -108,8 +108,9 @@ const showCurrentImage = () => {
     }
   });
 };
-// want it load with only
+// want it load with only one image
 showCurrentImage();
+
 // ---------------- EVENT LISTENERS ---------- //
 
 // FOR LOADING SCREEN

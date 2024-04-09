@@ -2,7 +2,7 @@
 export type Enemy = {
   name: string;
   hp: number;
-  img: "";
+  img: string;
   isAlive: boolean;
 };
 
