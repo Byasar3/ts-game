@@ -7,6 +7,30 @@
   font-family: $main-font;
 }
 
+html {
+  background-color: #011d33;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  background-image: url(../assets/loading-page.jpg);
+  background-repeat: no-repeat;
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the background image */
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+  height: 100%; /* Set height to 100% of viewport height */
+  width: 100%;
+}
+
 // classes that are added/removed to the 'screens' when transitioning
 .hide {
   display: none;
@@ -26,12 +50,16 @@
     font-size: $large-font;
     margin: 50px;
     text-align: center;
+    color: rgb(31, 27, 34);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.799); /* Horizontal offset, vertical offset, blur radius, color */
   }
 
   &__description {
     font-size: $medium-font;
     margin: 50px;
     text-align: center;
+    color: rgb(196, 209, 247);
+    text-shadow: 2px 2px 4px rgba(4, 10, 30, 0.609); /* Horizontal offset, vertical offset, blur radius, color */
   }
 
   &__button {
@@ -79,22 +107,31 @@
     display: flex;
     flex-direction: row;
     font-size: $medium-font;
-    justify-content: center;
+    justify-content: space-between;
+    align-content: center;
     padding: 20px;
 
     &__character-img {
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      position: relative;
+      background: none;
+      height: 200px;
+      width: auto;
+      filter: drop-shadow(
+        0 0 20px rgba(136, 158, 158, 0.487)
+      ); /* Add a drop shadow */
     }
 
     &__left-arrow,
     &__right-arrow {
+      position: static;
       font-size: $medium-font;
+      background: none;
       padding: 5px;
       margin: auto;
-      border: 2px solid black;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border: none;
+      filter: drop-shadow(
+        0 0 20px rgba(136, 158, 158, 0.487)
+      ); /* Add a drop shadow */
     }
   }
 
@@ -113,17 +150,24 @@
 
 // game screen
 .game-screen {
-  flex-direction: column;
-  // can be row when bigger screen?
+  flex-direction: row;
   font-size: $medium-font;
   margin: 50px;
   justify-content: space-between;
   align-items: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(1, 6, 22, 0.889); /* Horizontal offset, vertical offset, blur radius, color */
 }
+
 .character {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
   &__stats {
     display: flex;
     flex-direction: row;
+    font-size: $small-font;
 
     &__hp {
       padding: 10px;
@@ -139,42 +183,73 @@
   }
 
   &__info {
-	display: flex;
-	flex-direction: column;
-	font-size: $medium-font;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-size: $medium-font;
+    align-items: center;
+    font-size: $small-font;
 
-	&__img {
-		height: auto;
-		width: 100px;
-	}
+    &__img {
+      height: auto;
+      width: 100px;
+      filter: drop-shadow(
+        0 0 20px rgba(136, 158, 158, 0.487)
+      ); /* Add a drop shadow */
+    }
   }
 
   &__actions {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     &__atk,
     &__rest,
     &__heal {
-      font-size: $medium-font;
+      font-size: $small-font;
       padding: 10px;
-	  margin: auto;
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      margin: auto;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      color: white;
+      border-radius: 50px;
     }
 
-	&__atk {
-		background-color: red;
-	}
+    &__atk {
+      background-color: rgba(222, 97, 97, 0.5);
 
-	&__rest {
-		background-color: blue;
-	}
+      :hover {
+      }
+    }
 
-	&__heal {
-		background-color: green;
-	}
+    &__rest {
+      background-color: rgba(45, 45, 165, 0.5);
+    }
+
+    &__heal {
+      background-color: rgba(42, 140, 42, 0.5);
+    }
+  }
+}
+
+.enemy {
+  display: flex;
+  flex-direction: column;
+  font-size: $small-font;
+  align-items: center;
+  justify-self: center;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    font-size: $small-font;
+    align-items: center;
+    justify-self: center;
+
+    &__img {
+      filter: drop-shadow(
+        0 0 20px rgba(178, 7, 32, 0.956)
+      ); /* Add a drop shadow */
+    }
   }
 }
 
