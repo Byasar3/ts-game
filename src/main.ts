@@ -161,14 +161,23 @@ isCharacterDefeated();
 
 const handleCharacterRest = () => {
   // 1. a random number rest will be generated (outside function)
+  const randomStaminaRestore = getRandomNumber(15, 60)
   // 2. that number will be added to character's stamina, updating new stamina
+  player1.stamina += randomStaminaRestore
+  characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
   // 3. will trigger enemy attack (outside function)
   enemyAttack();
 }
 
 const handleCharacterHeal = () => {
   // 1. a random number heal will be generated (outside function)
+  const randomHealRestore = getRandomNumber(90, 200)
   // 2. that number will be added to characters health, updating new health
+  player1.hp += randomHealRestore;
+  characterHealth.innerHTML = `Health: ${player1.hp}`;
+  // stamina cost
+  player1.stamina -= 30;
+  characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
   // 3. will trigger enemy attack (outside function)
   enemyAttack();
 }
