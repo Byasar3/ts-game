@@ -142,10 +142,15 @@ const handleNameInput = (event: Event) => {
 
 const handleCharacterAttack = () => {
   // 1. a random number atk will be generated (outside function)
+  const characterAttackAmount = getRandomNumber(80, 120); 
   // 2. that number will be taken away from the enemy's hp, updating new hp
+  currentEnemy.hp -= characterAttackAmount
+  enemyHealth.innerHTML = `Health: ${currentEnemy.hp}`;
   // 3. the attack stamina cost will be taken from user's stamina, updating new stamina
+  player1.stamina -= 15 
+  characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
   // 4. need to check if enemy is alive or not (outside function)
-isEnemyDefeated();
+// isEnemyDefeated();
   // 5. will trigger enemy attack (outside function)
 enemyAttack();
 }
@@ -201,9 +206,16 @@ const loadGameScreen = () => {
 
 // game function:
 
+const getRandomNumber = (min : number, max : number) : number=> {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 const enemyAttack = () => {
   // 1. again random number generated
+  const enemyAttackAmount = getRandomNumber(50, 175) // 150 feels easy = monster dies too soon, 200 feels hard = need to heal first round
   // 2. that random number is taken from character's health, updating new health
+   player1.hp -= enemyAttackAmount;
+   characterHealth.innerHTML = `Health: ${player1.hp}`;
 }
 
 const isEnemyDefeated = () => {
