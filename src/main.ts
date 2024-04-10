@@ -168,6 +168,8 @@ const handleCharacterRest = () => {
   characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
   // 3. will trigger enemy attack (outside function)
   enemyAttack();
+  // need to check if character is alive or not (outside function)
+  isCharacterDefeated();
 };
 
 const handleCharacterHeal = () => {
@@ -182,6 +184,8 @@ const handleCharacterHeal = () => {
     characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
     // 3. will trigger enemy attack (outside function)
     enemyAttack();
+    // need to check if character is alive or not (outside function)
+    isCharacterDefeated();
   } else {
     console.log("not enough stamina!!");
     // but want to print this out to user, maybe innerhtml??
