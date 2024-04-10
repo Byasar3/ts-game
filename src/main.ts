@@ -43,6 +43,11 @@ const characterAttack = document.querySelector(".character__actions__atk");
 const characterRest = document.querySelector(".character__actions__rest");
 const characterHeal = document.querySelector(".character__actions__heal");
 
+// FOR END GAME SCREENS
+
+const endGameWinScreen = document.querySelector(".end-game-win-screen");
+const gameOverScreen = document.querySelector(".game-over-screen")
+
 // ---------------- GUARD CLAUSES ------------ //
 if (
   !loadingScreen ||
@@ -64,7 +69,9 @@ if (
   !enemyName ||
   !characterAttack ||
   !characterRest ||
-  !characterHeal
+  !characterHeal ||
+  !endGameWinScreen ||
+  !gameOverScreen
 ) {
   throw new Error("Issue with selectors");
 }
@@ -274,7 +281,10 @@ const isCharacterDefeated = () => {
     // hide game screen
     gameScreen.classList.remove("show");
     gameScreen.classList.add("hide");
+    
     // show game over screen
+    gameOverScreen.classList.remove("hide");
+    gameOverScreen.classList.add("show");
   }
 };
 
@@ -292,8 +302,8 @@ const userReachesEndGameWin = () => {
   gameScreen.classList.add("hide");
 
   // show end game win screen
-  // endGameWin.classList.remove("hide");
-  // endGameWin.classList.add("show");
+  endGameWinScreen.classList.remove("hide");
+  endGameWinScreen.classList.add("show");
 };
 
 const gameOver = () => {
