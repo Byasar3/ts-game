@@ -62,12 +62,13 @@ if (
   !characterInfoDiv ||
   !characterHealth ||
   !characterStamina ||
+  !characterScore ||
   !enemyHealth ||
   !enemyImg ||
   !enemyName ||
   !characterAttack ||
   !characterRest ||
-  !characterHeal 
+  !characterHeal
 ) {
   throw new Error("Issue with selectors");
 }
@@ -154,6 +155,8 @@ const handleCharacterAttack = () => {
 isEnemyDefeated();
   // 5. will trigger enemy attack (outside function)
 enemyAttack();
+// need to check if character is alive or not (outside function)
+isCharacterDefeated();
 }
 
 const handleCharacterRest = () => {
@@ -239,21 +242,24 @@ const isEnemyDefeated = () => {
           characterScore.innerHTML = `Score: ${player1.score}`;
     } else {
       // no monsters left triggers end of game logic
-      userReachesEndGame();
+      userReachesEndGameWin();
     }
   }
   // 2. give some sort of "wow you won, next level message" ----- will work on that as extension
 }
 
 const isCharacterDefeated = () => {
-  // if statement to check of boolean isAlive is true or false
-  // if false ie !isAlive:
-  // trigger game over screen (not currently created):
-  // need to add section into HTML -> classic game over, character in b&w? name, score, health, stamina, etc
-  // need to do the whole gamescreen.class list trigger thing -> set a function to loadEndGameLossScreen
+  // if statement to check character hp
+  if (player1.hp <= 0) {
+    gameOver();
+    // hide game screen
+    gameScreen.classList.remove("show");
+    gameScreen.classList.add("hide");
+    // show game over screen
+  }
 }
 
-const userReachesEndGame = () => {
+const userReachesEndGameWin = () => {
   // when the new data array reaches it's end!! handled in is enemy defeated logic
   // trigger end screen winning
   console.log("end game win!");
@@ -272,6 +278,13 @@ const userReachesEndGame = () => {
   // endGameWin.classList.add("show");
 }
 
+const gameOver = () => {
+  console.log("game over");
+  // ^ its working!!
+  // trigger game over screen (not currently created):
+  // need to add section into HTML -> classic game over, character in b&w? name, score, health, stamina, etc
+  // need to do the whole gamescreen.class list trigger thing -> set a function to loadEndGameLossScreen
+}
 // ---------------- EVENT LISTENERS ---------- //
 
 // FOR LOADING SCREEN
