@@ -1,5 +1,5 @@
 import { player1 } from "./character";
-import { levelOneEnemy, levelTwoEnemy, levelThreeEnemy, Enemy } from "./enemy";
+import { enemyData, Enemy } from "./enemy";
 import "../styles/style.scss";
 
 // --------------- QUERY SELECTORS ---------- //
@@ -84,7 +84,8 @@ characterScore.innerHTML = `Score: ${currentCharacterScore}`;
 
 //note: might be able to do this by just characterThing.innerhtml = ${player1.thing}
 
-let currentEnemy: Enemy = levelOneEnemy;
+let currentEnemyIndex = 0;
+let currentEnemy: Enemy = enemyData[currentEnemyIndex];
 
 let currentEnemyHealth = currentEnemy.hp;
 enemyHealth.innerHTML = `Health: ${currentEnemyHealth}`;
@@ -150,7 +151,7 @@ const handleCharacterAttack = () => {
   player1.stamina -= 15 
   characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
   // 4. need to check if enemy is alive or not (outside function)
-// isEnemyDefeated();
+isEnemyDefeated();
   // 5. will trigger enemy attack (outside function)
 enemyAttack();
 }
@@ -219,12 +220,29 @@ const enemyAttack = () => {
 }
 
 const isEnemyDefeated = () => {
-  // if statement to check if bollean isAlive is true 
-  // if false ie !isAlive:
-  // 1. give character a score (theres no function for this, maybe hard code a variable?)
-  // 2. give some sort of "wow you won, next level message"
-  // 3. set current enemy to next enemy
-  // else true = enemy is alive = game continues
+  // if statement to check if enemy alive or not
+  // if false ie 
+  if (currentEnemy.hp <= 0) {
+    currentEnemyIndex++;
+      // checking if any monsters left
+    if (currentEnemyIndex < enemyData.length) {
+          currentEnemy = enemyData[currentEnemyIndex];
+          // update with new enemy information -> set current enemy to next enemy
+          currentEnemyHealth = currentEnemy.hp;
+          enemyHealth.innerHTML = `Health: ${currentEnemyHealth}`;
+          currentEnemyName = currentEnemy.name;
+          enemyName.innerHTML = `${currentEnemyName}`;
+          currentEnemyImage = currentEnemy.img;
+          enemyImg.src = currentEnemyImage;
+          // give character a score (theres no function for this, maybe hard code a variable?)
+          player1.score += 100;
+          characterScore.innerHTML = `Score: ${player1.score}`;
+    } else {
+      // no monsters left triggers end of game logic
+      userReachesEndGame();
+    }
+  }
+  // 2. give some sort of "wow you won, next level message" ----- will work on that as extension
 }
 
 const isCharacterDefeated = () => {
@@ -236,11 +254,22 @@ const isCharacterDefeated = () => {
 }
 
 const userReachesEndGame = () => {
-  // i guess will be same as isEnemyDefeated, but only for the remaining enemy?
-  // or when score reaches a determined point, as score at end game will be same for everyone
+  // when the new data array reaches it's end!! handled in is enemy defeated logic
   // trigger end screen winning
+  console.log("end game win!");
+  // ^ its working!!
+
   // same as above, needs HTML -> won, name, score, health, stamina etc
   // again, need to do whole classlist.add etc
+
+  
+  // hide game screen
+  gameScreen.classList.remove("show");
+  gameScreen.classList.add("hide");
+
+  // show end game win screen
+  // endGameWin.classList.remove("hide");
+  // endGameWin.classList.add("show");
 }
 
 // ---------------- EVENT LISTENERS ---------- //
