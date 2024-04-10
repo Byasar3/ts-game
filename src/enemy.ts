@@ -1,3 +1,7 @@
+import monster1 from "../assets/procrastinatopus.png"
+import monster2 from "../assets/comparisoncrustaceans.png"
+import monster3 from "../assets/crappythoughtscloud.png"
+
 // creating enemy aliase/interface/object
 export type Enemy = {
   name: string;
@@ -11,10 +15,24 @@ export type Enemy = {
 
 // level 1
 export const levelOneEnemy : Enemy = {
-	name : "basic goblin",
+	name : "procrastinatopus",
 	hp : 400,
-	img : "",
+	img : monster1,
 	isAlive: true
 }
 
-// to level 10 for eg
+// level 2
+export const levelTwoEnemy : Enemy = {
+	name : "comparison crustaceans",
+	hp : 400,
+	img : monster2,
+	isAlive : true
+}
+
+// level 3
+export const levelThreeEnemy : Enemy = {
+	name : "crappy thoughts cloud",
+	hp : 400,
+	img : monster3,
+	isAlive : true
+}

@@ -1,4 +1,5 @@
 import { player1 } from "./character";
+import { levelOneEnemy, levelTwoEnemy, levelThreeEnemy, Enemy } from "./enemy";
 import "../styles/style.scss"
 
 // --------------- QUERY SELECTORS ---------- //
@@ -35,6 +36,9 @@ const submitChoicesButton = document.querySelector<HTMLButtonElement>(
 // FOR GAME SCREEN:
 
 const characterInfoDiv = document.querySelector(".character__info");
+const enemyHealth = document.querySelector(".enemy__stats__hp");
+const enemyImg = document.querySelector<HTMLImageElement>(".enemy__info__img")
+const enemyName = document.querySelector(".enemy__info__name")
 
 // ---------------- GUARD CLAUSES ------------ //
 if (
@@ -51,13 +55,34 @@ if (
   !characterInfoDiv ||
   !characterHealth ||
   !characterStamina ||
-  !characterScore
+  !enemyHealth ||
+  !enemyImg ||
+  !enemyName
 ) {
   throw new Error("Issue with selectors");
 }
 // ---------------- VARIABLES ------------------//
-// let currentCharacterHealth = toString(player1.hp);
-// characterHealth.innerHTML = currentCharacterHealth;
+let currentCharacterHealth = player1.hp;
+characterHealth.innerHTML = `${currentCharacterHealth}`;
+
+let currentCharacterStamina = player1.stamina;
+characterStamina.innerHTML = `${currentCharacterStamina}`;
+
+let currentCharacterScore = player1.score;
+characterScore.innerHTML = `${currentCharacterScore}`;
+
+//note: might be able to do this by just characterThing.innerhtml = ${player1.thing}
+
+let currentEnemy: Enemy = levelOneEnemy;
+
+let currentEnemyHealth = currentEnemy.hp;
+enemyHealth.innerHTML = `Health: ${currentEnemyHealth}`;
+
+let currentEnemyName = currentEnemy.name;
+enemyName.innerHTML = `${currentEnemyName}`;
+
+let currentEnemyImage = currentEnemy.img;
+enemyImg.src = currentEnemyImage;
 
 
 // ---------------- EVENT HANDLERS ----------- //
@@ -104,9 +129,7 @@ const handleNameInput = (event: Event) => {
 };
 
 
-// ---------------- FUNCTIONS ----------------- //
-
-
+// ---------------- FUNCTIONS ----------------- /
 
 // clicking through images
 const showCurrentImage = () => {
@@ -141,6 +164,11 @@ const loadGameScreen = () => {
   gameScreen.classList.remove("hide");
   gameScreen.classList.add("show");
 };
+
+// game function:
+
+
+
 // ---------------- EVENT LISTENERS ---------- //
 
 // FOR LOADING SCREEN

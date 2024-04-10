@@ -1,4 +1,3 @@
-
 // creating character aliase/interface/object
 export type Character = {
   name: string;
