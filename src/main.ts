@@ -35,13 +35,16 @@ const submitChoicesButton = document.querySelector<HTMLButtonElement>(
 
 // FOR GAME SCREEN:
 
-const characterInfoDiv = document.querySelector(".character__info");
 const enemyHealth = document.querySelector(".enemy__stats__hp");
 const enemyImg = document.querySelector<HTMLImageElement>(".enemy__info__img");
 const enemyName = document.querySelector(".enemy__info__name");
 const characterAttack = document.querySelector(".character__actions__atk");
 const characterRest = document.querySelector(".character__actions__rest");
 const characterHeal = document.querySelector(".character__actions__heal");
+const characterImg = document.querySelector<HTMLImageElement>(
+  ".character__info__img"
+);
+const characterName = document.querySelector(".character__info__name");
 
 // FOR END GAME SCREENS
 
@@ -54,14 +57,16 @@ const gameOverImg = document.querySelector<HTMLImageElement>(
 const gameOverScreenButton = document.querySelector<HTMLButtonElement>(
   ".game-over-screen__button"
 );
-const endGameWinContent = document.querySelector(".end-game-win-screen__content");
+const endGameWinContent = document.querySelector(
+  ".end-game-win-screen__content"
+);
 const endGameWinImg = document.querySelector<HTMLImageElement>(
-  ".end-game-win-screen__img")
+  ".end-game-win-screen__img"
+);
 
 const endGameWinScreenButton = document.querySelector<HTMLButtonElement>(
   ".end-game-win-screen__button"
-);  
-
+);
 
 // ---------------- GUARD CLAUSES ------------ //
 if (
@@ -75,7 +80,6 @@ if (
   !leftArrow ||
   !rightArrow ||
   !submitChoicesButton ||
-  !characterInfoDiv ||
   !characterHealth ||
   !characterStamina ||
   !characterScore ||
@@ -85,6 +89,8 @@ if (
   !characterAttack ||
   !characterRest ||
   !characterHeal ||
+  !characterImg ||
+  !characterName ||
   !endGameWinScreen ||
   !gameOverScreen ||
   !gameOverContent ||
@@ -97,29 +103,23 @@ if (
   throw new Error("Issue with selectors");
 }
 
-// ---------------- VARIABLES ------------------// 
-let currentCharacterHealth = player1.hp;
-characterHealth.innerHTML = `Health: ${currentCharacterHealth}`;
+// ---------------- VARIABLES ------------------//
+characterHealth.innerHTML = `Health: ${player1.hp}`;
 
-let currentCharacterStamina = player1.stamina;
-characterStamina.innerHTML = `Stamina: ${currentCharacterStamina}`;
+characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
 
-let currentCharacterScore = player1.score;
-characterScore.innerHTML = `Score: ${currentCharacterScore}`;
+characterScore.innerHTML = `Score: ${player1.score}`;
 
 //note: might be able to do this by just characterThing.innerhtml = ${player1.thing}
 
 let currentEnemyIndex = 0;
 let currentEnemy: Enemy = enemyData[currentEnemyIndex];
 
-let currentEnemyHealth = currentEnemy.hp;
-enemyHealth.innerHTML = `Health: ${currentEnemyHealth}`;
+enemyHealth.innerHTML = `Health: ${currentEnemy.hp}`;
 
-let currentEnemyName = currentEnemy.name;
-enemyName.innerHTML = `${currentEnemyName}`;
+enemyName.innerHTML = `${currentEnemy.name}`;
 
-let currentEnemyImage = currentEnemy.img;
-enemyImg.src = currentEnemyImage;
+enemyImg.src = currentEnemy.img;
 
 // ---------------- EVENT HANDLERS ----------- //
 
@@ -139,29 +139,13 @@ const handleRightArrowClick = () => {
 const handleUserInputs = () => {
   const currentImage = characterImages[currentIndex] as HTMLImageElement;
   player1.img = currentImage.src;
-  // creating a html element to store img on
-  const characterImg = document.createElement("img");
-  // adding class name to element
-  characterImg.classList.add("character__info__img");
-  // using this info to update user's img on game screen
   characterImg.src = player1.img;
-  characterImg.alt = "Character image";
-  // adding this element to the div
-  characterInfoDiv.appendChild(characterImg);
-
-  // creating a html element to store name on
-  const characterName = document.createElement("h1");
-  // adding class name to element
-  characterName.classList.add("character__info__name");
-  // using this info to update user's name on game screen
-  characterName.textContent = player1.name;
-  // adding this element to the div
-  characterInfoDiv.appendChild(characterName);
 };
 
 const handleNameInput = (event: Event) => {
   const target = (event.target as HTMLInputElement).value;
   player1.name = target;
+  characterName.innerHTML = player1.name;
 };
 
 // FOR GAME SCREEN
@@ -225,34 +209,30 @@ const handleGameRestart = () => {
   player1.hp = 500;
   player1.stamina = 500;
   player1.score = 0;
-  console.log(1);
-  
+
   //reset enemy data
   currentEnemyIndex = 0;
   currentEnemy = enemyData[currentEnemyIndex];
   console.log(2);
-  
-  //update the page with this information -> 
+
+  //update the page with this information ->
   characterHealth.innerHTML = `Health: ${player1.hp}`;
   characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
   characterScore.innerHTML = `Health: ${player1.score}`;
   enemyName.innerHTML = `${currentEnemy.name}`;
   enemyImg.src = currentEnemy.img;
-  console.log(3);
-  
+
   // screen transitions
   gameOverScreen.classList.remove("show");
   gameOverScreen.classList.add("hide");
+
   endGameWinScreen.classList.remove("show");
   endGameWinScreen.classList.add("hide");
-  console.log(4);
-  
+
   loadingScreen.classList.remove("hide");
   loadingScreen.classList.add("show");
-  console.log(5);
-  
+};
 
-}
 // ---------------- FUNCTIONS ----------------- /
 
 // clicking through images
@@ -265,6 +245,7 @@ const showCurrentImage = () => {
     }
   });
 };
+
 // want it load with only one image
 showCurrentImage();
 
@@ -297,7 +278,7 @@ const getRandomNumber = (min: number, max: number): number => {
 
 const enemyAttack = () => {
   // 1. again random number generated
-  const enemyAttackAmount = getRandomNumber(50, 150); // 150 feels easy = monster dies too soon, 200 feels hard = need to heal first round
+  const enemyAttackAmount = getRandomNumber(50, 150);
   // 2. that random number is taken from character's health, updating new health
   player1.hp -= enemyAttackAmount;
   characterHealth.innerHTML = `Health: ${player1.hp}`;
@@ -312,12 +293,9 @@ const isEnemyDefeated = () => {
     if (currentEnemyIndex < enemyData.length) {
       currentEnemy = enemyData[currentEnemyIndex];
       // update with new enemy information -> set current enemy to next enemy
-      currentEnemyHealth = currentEnemy.hp;
-      enemyHealth.innerHTML = `Health: ${currentEnemyHealth}`;
-      currentEnemyName = currentEnemy.name;
-      enemyName.innerHTML = `${currentEnemyName}`;
-      currentEnemyImage = currentEnemy.img;
-      enemyImg.src = currentEnemyImage;
+      enemyHealth.innerHTML = `Health: ${currentEnemy.hp}`;
+      enemyName.innerHTML = `${currentEnemy.name}`;
+      enemyImg.src = currentEnemy.img;
       // give character a score (theres no function for this, maybe hard code a variable?)
       player1.score += 100;
       characterScore.innerHTML = `Score: ${player1.score}`;
@@ -338,12 +316,6 @@ const isCharacterDefeated = () => {
 
 const userReachesEndGameWin = () => {
   // when the new data array reaches it's end!! handled in is enemy defeated logic
-  // trigger end screen winning
-  console.log("end game win!");
-  // ^ its working!!
-
-  // same as above, needs HTML -> won, name, score, health, stamina etc
-  // again, need to do whole classlist.add etc
 
   // hide game screen
   gameScreen.classList.remove("show");
@@ -359,22 +331,22 @@ const userReachesEndGameWin = () => {
     Stamina: ${player1.stamina}
     Score: ${player1.score}
     `;
-
 };
 
 const gameOver = () => {
-  console.log("game over");
-  // ^ its working!!
   // hide game screen
   gameScreen.classList.remove("show");
   gameScreen.classList.add("hide");
+
+  // is already there but is still showing?
+  endGameWinScreen.classList.add("hide");
 
   // show game over screen
   gameOverScreen.classList.remove("hide");
   gameOverScreen.classList.add("show");
 
-  gameOverImg.src = player1.img
-  
+  gameOverImg.src = player1.img;
+
   gameOverContent.innerHTML = `
     Health: ${player1.hp}
     Stamina: ${player1.stamina}
@@ -407,22 +379,7 @@ characterHeal.addEventListener("click", handleCharacterHeal);
 
 // FOR END GAME SCREENS
 
-gameOverScreenButton.addEventListener("click", handleGameRestart)
-endGameWinScreenButton.addEventListener("click", handleGameRestart)
+gameOverScreenButton.addEventListener("click", handleGameRestart);
+endGameWinScreenButton.addEventListener("click", handleGameRestart);
 
 ////////////////// NOTES
-
-// ----------------- SELECTION SCREEN -----------------------
-
-// will handle input logic for selection screen
-// like user inputting name and selection of character
-
-// --------------------- GAME SCREEN -----------------
-
-// will contain main game logic:
-// player actions, enemy behaviour, scoring and other game play mechanics
-
-// --------------------- END GAME SCREEN/S -----------------
-
-// will contain logic to handle what happens if game is won, and how game is won
-// will handle logic on how game is lost, and what to do when game is lost
