@@ -46,7 +46,14 @@ const characterHeal = document.querySelector(".character__actions__heal");
 // FOR END GAME SCREENS
 
 const endGameWinScreen = document.querySelector(".end-game-win-screen");
-const gameOverScreen = document.querySelector(".game-over-screen")
+const gameOverScreen = document.querySelector(".game-over-screen");
+const gameOverContent = document.querySelector(".game-over-screen__content");
+const gameOverImg = document.querySelector<HTMLImageElement>(
+  ".game-over-screen__img"
+);
+const gameOverButton = document.querySelector<HTMLButtonElement>(
+  ".game-over-screen__button"
+);
 
 // ---------------- GUARD CLAUSES ------------ //
 if (
@@ -71,12 +78,15 @@ if (
   !characterRest ||
   !characterHeal ||
   !endGameWinScreen ||
-  !gameOverScreen
+  !gameOverScreen ||
+  !gameOverContent ||
+  !gameOverImg ||
+  !gameOverButton
 ) {
   throw new Error("Issue with selectors");
 }
 
-// ---------------- VARIABLES ------------------//
+// ---------------- VARIABLES ------------------// 
 let currentCharacterHealth = player1.hp;
 characterHealth.innerHTML = `Health: ${currentCharacterHealth}`;
 
@@ -198,6 +208,32 @@ const handleCharacterHeal = () => {
     // but want to print this out to user, maybe innerhtml??
   }
 };
+
+const handleGameRestart = () => {
+  //reset player values
+  player1.hp = 500;
+  player1.stamina = 500;
+  player1.score = 0;
+
+  //reset enemy data
+  currentEnemyIndex = 0;
+  currentEnemy = enemyData[currentEnemyIndex];
+
+  //update the page with this information -> 
+  characterHealth.innerHTML = `Health: ${player1.hp}`;
+  characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
+  characterScore.innerHTML = `Health: ${player1.score}`;
+  enemyName.innerHTML = `${currentEnemy.name}`;
+  enemyImg.src = currentEnemy.img;
+
+  // screen transitions
+  gameOverScreen.classList.remove("show");
+  gameOverScreen.classList.add("hide");
+
+  loadingScreen.classList.remove("hide");
+  loadingScreen.classList.add("show");
+
+}
 // ---------------- FUNCTIONS ----------------- /
 
 // clicking through images
@@ -278,13 +314,6 @@ const isCharacterDefeated = () => {
   // if statement to check character hp
   if (player1.hp <= 0) {
     gameOver();
-    // hide game screen
-    gameScreen.classList.remove("show");
-    gameScreen.classList.add("hide");
-    
-    // show game over screen
-    gameOverScreen.classList.remove("hide");
-    gameOverScreen.classList.add("show");
   }
 };
 
@@ -309,9 +338,21 @@ const userReachesEndGameWin = () => {
 const gameOver = () => {
   console.log("game over");
   // ^ its working!!
-  // trigger game over screen (not currently created):
-  // need to add section into HTML -> classic game over, character in b&w? name, score, health, stamina, etc
-  // need to do the whole gamescreen.class list trigger thing -> set a function to loadEndGameLossScreen
+  // hide game screen
+  gameScreen.classList.remove("show");
+  gameScreen.classList.add("hide");
+
+  // show game over screen
+  gameOverScreen.classList.remove("hide");
+  gameOverScreen.classList.add("show");
+
+  gameOverImg.src = player1.img
+  
+  gameOverContent.innerHTML = `
+    Health: ${player1.hp}
+    Stamina: ${player1.stamina}
+    Score: ${player1.score}
+    `;
 };
 // ---------------- EVENT LISTENERS ---------- //
 
@@ -336,6 +377,10 @@ characterAttack.addEventListener("click", handleCharacterAttack);
 characterRest.addEventListener("click", handleCharacterRest);
 
 characterHeal.addEventListener("click", handleCharacterHeal);
+
+// FOR END GAME SCREENS
+
+gameOverButton.addEventListener("click", handleGameRestart)
 
 ////////////////// NOTES
 

@@ -5,7 +5,6 @@ export type Character = {
   stamina: number;
   score: number;
   img: string;
-  isAlive: boolean;
 };
 
 // creating new character based on user input
@@ -15,7 +14,6 @@ export const player1: Character = {
   stamina: 500, // starting stamina
   score: 0, // starting score
   img: "", // will be based on user input
-  isAlive: true,
 };
 
 
