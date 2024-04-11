@@ -51,9 +51,17 @@ const gameOverContent = document.querySelector(".game-over-screen__content");
 const gameOverImg = document.querySelector<HTMLImageElement>(
   ".game-over-screen__img"
 );
-const gameOverButton = document.querySelector<HTMLButtonElement>(
+const gameOverScreenButton = document.querySelector<HTMLButtonElement>(
   ".game-over-screen__button"
 );
+const endGameWinContent = document.querySelector(".end-game-win-screen__content");
+const endGameWinImg = document.querySelector<HTMLImageElement>(
+  ".end-game-win-screen__img")
+
+const endGameWinScreenButton = document.querySelector<HTMLButtonElement>(
+  ".end-game-win-screen__button"
+);  
+
 
 // ---------------- GUARD CLAUSES ------------ //
 if (
@@ -81,7 +89,10 @@ if (
   !gameOverScreen ||
   !gameOverContent ||
   !gameOverImg ||
-  !gameOverButton
+  !gameOverScreenButton ||
+  !endGameWinContent ||
+  !endGameWinImg ||
+  !endGameWinScreenButton
 ) {
   throw new Error("Issue with selectors");
 }
@@ -214,24 +225,32 @@ const handleGameRestart = () => {
   player1.hp = 500;
   player1.stamina = 500;
   player1.score = 0;
-
+  console.log(1);
+  
   //reset enemy data
   currentEnemyIndex = 0;
   currentEnemy = enemyData[currentEnemyIndex];
-
+  console.log(2);
+  
   //update the page with this information -> 
   characterHealth.innerHTML = `Health: ${player1.hp}`;
   characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
   characterScore.innerHTML = `Health: ${player1.score}`;
   enemyName.innerHTML = `${currentEnemy.name}`;
   enemyImg.src = currentEnemy.img;
-
+  console.log(3);
+  
   // screen transitions
   gameOverScreen.classList.remove("show");
   gameOverScreen.classList.add("hide");
-
+  endGameWinScreen.classList.remove("show");
+  endGameWinScreen.classList.add("hide");
+  console.log(4);
+  
   loadingScreen.classList.remove("hide");
   loadingScreen.classList.add("show");
+  console.log(5);
+  
 
 }
 // ---------------- FUNCTIONS ----------------- /
@@ -333,6 +352,14 @@ const userReachesEndGameWin = () => {
   // show end game win screen
   endGameWinScreen.classList.remove("hide");
   endGameWinScreen.classList.add("show");
+
+  endGameWinImg.src = player1.img;
+  endGameWinContent.innerHTML = `
+    Health: ${player1.hp}
+    Stamina: ${player1.stamina}
+    Score: ${player1.score}
+    `;
+
 };
 
 const gameOver = () => {
@@ -380,7 +407,8 @@ characterHeal.addEventListener("click", handleCharacterHeal);
 
 // FOR END GAME SCREENS
 
-gameOverButton.addEventListener("click", handleGameRestart)
+gameOverScreenButton.addEventListener("click", handleGameRestart)
+endGameWinScreenButton.addEventListener("click", handleGameRestart)
 
 ////////////////// NOTES
 
