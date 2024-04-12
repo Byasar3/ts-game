@@ -44,34 +44,41 @@ main {
 
 .loading-screen {
   flex-direction: column;
-  margin: 50px;
+  padding-bottom: 200px;
 
   &__heading {
     font-size: $large-font;
     margin: 50px;
     text-align: center;
-    color: rgb(31, 27, 34);
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.799); /* Horizontal offset, vertical offset, blur radius, color */
+    color: rgb(20, 8, 66);
+    text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.799), 0px 0px 50px white; /* Horizontal offset, vertical offset, blur radius, color */
   }
 
   &__description {
     font-size: $medium-font;
     margin: 50px;
     text-align: center;
-    color: rgb(196, 209, 247);
-    text-shadow: 2px 2px 4px rgba(4, 10, 30, 0.609); /* Horizontal offset, vertical offset, blur radius, color */
+    color: #f1f2ec;
+    text-shadow: 1px 1px 1px rgba(4, 10, 30, 0.609), 2px 2px 25px black; /* Horizontal offset, vertical offset, blur radius, color */
   }
 
   &__button {
     font-size: $large-font;
-    background-color: blanchedalmond;
-    width: 60%;
+    background-color: rgba(30, 18, 78, 0.664);
+    border: none;
+    border-radius: 50px;
+    color: #f1f2ec;
+    width: 30%;
     margin: auto;
     padding: 5px;
-    border: 2px solid black;
     text-align: center;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0px 55px 60px 0 rgb(0, 0, 0);
+    &:hover {
+      background-color: rgba(192, 218, 59, 0.76);
+      color: #011d33;
+      transform:scale(1.15);
+      transition: 2s;
+    }
   }
 }
 
@@ -216,9 +223,6 @@ main {
 
     &__atk {
       background-color: rgba(222, 97, 97, 0.5);
-
-      :hover {
-      }
     }
 
     &__rest {
