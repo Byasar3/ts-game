@@ -38,14 +38,20 @@ const submitChoicesButton = document.querySelector<HTMLButtonElement>(
 const enemyHealth = document.querySelector(".enemy__stats__hp");
 const enemyImg = document.querySelector<HTMLImageElement>(".enemy__info__img");
 const enemyName = document.querySelector(".enemy__info__name");
-const characterAttack = document.querySelector(".character__actions__atk");
-const characterRest = document.querySelector(".character__actions__rest");
-const characterHeal = document.querySelector(".character__actions__heal");
+const characterAttack = document.querySelector<HTMLButtonElement>(
+  ".character__actions__atk"
+);
+const characterRest = document.querySelector<HTMLButtonElement>(
+  ".character__actions__rest"
+);
+const characterHeal = document.querySelector<HTMLButtonElement>(
+  ".character__actions__heal"
+);
 const characterImg = document.querySelector<HTMLImageElement>(
   ".character__info__img"
 );
 const characterName = document.querySelector(".character__info__name");
-
+const feedback = document.querySelector(".game-screen__feeback");
 // FOR END GAME SCREENS
 
 const endGameWinScreen = document.querySelector(".end-game-win-screen");
@@ -98,7 +104,8 @@ if (
   !gameOverScreenButton ||
   !endGameWinContent ||
   !endGameWinImg ||
-  !endGameWinScreenButton
+  !endGameWinScreenButton ||
+  !feedback
 ) {
   throw new Error("Issue with selectors");
 }
@@ -151,7 +158,13 @@ const handleNameInput = (event: Event) => {
 // FOR GAME SCREEN
 
 const handleCharacterAttack = () => {
+  // disable buttons
+  characterAttack.disabled = true;
+  characterRest.disabled = true;
+  characterHeal.disabled = true;
+
   if (player1.stamina >= 20) {
+    characterAttack.disabled = true;
     // 1. a random number atk will be generated (outside function)
     const characterAttackAmount = getRandomNumber(80, 170);
     // 2. that number will be taken away from the enemy's hp, updating new hp
@@ -160,31 +173,58 @@ const handleCharacterAttack = () => {
     // 3. the attack stamina cost will be taken from user's stamina, updating new stamina
     player1.stamina -= 20;
     characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
+    showFeedback(
+      `You attacked ${currentEnemy.name}, causing ${characterAttackAmount} damage!`,
+      2000
+    );
     // 4. need to check if enemy is alive or not (outside function)
     isEnemyDefeated();
     // 5. will trigger enemy attack (outside function)
-    enemyAttack();
+    setTimeout(enemyAttack, 2500);
     // need to check if character is alive or not (outside function)
-    isCharacterDefeated();
+    setTimeout(isCharacterDefeated, 2800);
   } else {
-    console.log("not enough stamina!!");
+    showFeedback("Not enough stamina! Rest to increase stamina", 2000);
     // but want to print this out to user, maybe innerhtml??
   }
+
+  // enable buttons
+  setTimeout(() => {
+    characterAttack.disabled = false;
+    characterRest.disabled = false;
+    characterHeal.disabled = false;
+  }, 4000);
 };
 
 const handleCharacterRest = () => {
+  // disable buttons
+  characterAttack.disabled = true;
+  characterRest.disabled = true;
+  characterHeal.disabled = true;
   // 1. a random number rest will be generated (outside function)
   const randomStaminaRestore = getRandomNumber(15, 60);
   // 2. that number will be added to character's stamina, updating new stamina
   player1.stamina += randomStaminaRestore;
   characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
+  showFeedback(`You restored ${randomStaminaRestore} stamina!`, 2000);
   // 3. will trigger enemy attack (outside function)
-  enemyAttack();
+  setTimeout(enemyAttack, 2500);
   // need to check if character is alive or not (outside function)
-  isCharacterDefeated();
+  setTimeout(isCharacterDefeated, 2800);
+
+  // enable buttons
+  setTimeout(() => {
+    characterAttack.disabled = false;
+    characterRest.disabled = false;
+    characterHeal.disabled = false;
+  }, 4000);
 };
 
 const handleCharacterHeal = () => {
+  // disable buttons
+  characterAttack.disabled = true;
+  characterRest.disabled = true;
+  characterHeal.disabled = true;
   if (player1.stamina >= 50) {
     // 1. a random number heal will be generated (outside function)
     const randomHealRestore = getRandomNumber(150, 300);
@@ -194,14 +234,24 @@ const handleCharacterHeal = () => {
     // stamina cost
     player1.stamina -= 50;
     characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
+    showFeedback(
+      `You healed ${randomHealRestore}!`,
+      2000
+    );
     // 3. will trigger enemy attack (outside function)
-    enemyAttack();
+    setTimeout(enemyAttack, 2500);
     // need to check if character is alive or not (outside function)
-    isCharacterDefeated();
+    setTimeout(isCharacterDefeated, 2800);
   } else {
-    console.log("not enough stamina!!");
-    // but want to print this out to user, maybe innerhtml??
+    showFeedback("Not enough stamina! Rest to increase stamina", 2000);
   }
+
+  // enable buttons
+  setTimeout(() => {
+    characterAttack.disabled = false;
+    characterRest.disabled = false;
+    characterHeal.disabled = false;
+  }, 4000);
 };
 
 const handleGameRestart = () => {
@@ -221,7 +271,7 @@ const handleGameRestart = () => {
   characterScore.innerHTML = `Health: ${player1.score}`;
   enemyName.innerHTML = `${currentEnemy.name}`;
   currentEnemy.hp = 400;
-  enemyHealth.innerHTML = `${currentEnemy.hp}`;
+  enemyHealth.innerHTML = `Health: ${currentEnemy.hp}`;
   enemyImg.src = currentEnemy.img;
 
   // screen transitions
@@ -284,6 +334,19 @@ const enemyAttack = () => {
   // 2. that random number is taken from character's health, updating new health
   player1.hp -= enemyAttackAmount;
   characterHealth.innerHTML = `Health: ${player1.hp}`;
+  showFeedback(
+    `${currentEnemy.name} attacked you, causing ${enemyAttackAmount} damage!`,
+    2000
+  );
+};
+
+const showFeedback = (message: string, duration: number) => {
+  feedback.textContent = message;
+
+  // JS function that will execute a block of code after delay
+  setTimeout(() => {
+    feedback.textContent = "";
+  }, duration);
 };
 
 const isEnemyDefeated = () => {

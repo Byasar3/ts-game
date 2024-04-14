@@ -58,7 +58,7 @@ main {
     font-size: $medium-font;
     margin: 50px;
     text-align: center;
-    color: #f1f2ec;
+    color: #f5eec9;
     text-shadow: 1px 1px 1px rgba(4, 10, 30, 0.609), 2px 2px 25px black; /* Horizontal offset, vertical offset, blur radius, color */
   }
 }
@@ -134,20 +134,32 @@ main {
 
 // game screen
 .game-screen {
-  flex-direction: row;
-  font-size: $medium-font;
-  margin: 50px;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(1, 6, 22, 0.889); /* Horizontal offset, vertical offset, blur radius, color */
+  flex-direction: column;
+  font-size: $small-font;
+  color: rgb(235, 96, 41);
+  text-shadow: 2px 2px 4px rgb(1, 6, 22); /* Horizontal offset, vertical offset, blur radius, color */
+  padding: 30px;
+  text-align: center;
+  padding-top: 50px;
+  
+  &__components {
+    display: flex;
+    flex-direction: row;
+    margin: 80px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+
 }
+
 
 .character {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: stretch;
+
   &__stats {
     display: flex;
     flex-direction: row;
@@ -184,7 +196,13 @@ main {
   &__actions {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
+
+    &__buttons {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
 
     &__atk,
     &__rest,
