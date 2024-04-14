@@ -61,25 +61,6 @@ main {
     color: #f1f2ec;
     text-shadow: 1px 1px 1px rgba(4, 10, 30, 0.609), 2px 2px 25px black; /* Horizontal offset, vertical offset, blur radius, color */
   }
-
-  &__button {
-    font-size: $large-font;
-    background-color: rgba(30, 18, 78, 0.664);
-    border: none;
-    border-radius: 50px;
-    color: #f1f2ec;
-    width: 30%;
-    margin: auto;
-    padding: 5px;
-    text-align: center;
-    box-shadow: 0px 55px 60px 0 rgb(0, 0, 0);
-    &:hover {
-      background-color: rgba(192, 218, 59, 0.76);
-      color: #011d33;
-      transform:scale(1.15);
-      transition: 2s;
-    }
-  }
 }
 
 // ---- SELECTION SCREEN STYLING ----
@@ -88,10 +69,13 @@ main {
   flex-direction: column;
   font-size: $large-font;
   margin: 50px;
+  color: white;
 
   &__name-input {
     font-size: $medium-font;
     text-align: center;
+    text-shadow: 1px 1px 1px rgba(4, 10, 30, 0.609),
+      2px 2px 5px rgb(177, 237, 255); /* Horizontal offset, vertical offset, blur radius, color */
   }
 
   &__name-input-box {
@@ -102,12 +86,15 @@ main {
     text-align: center;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
       0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
   }
 
   &__choose-fighter {
     font-size: $large-font;
     text-align: center;
     padding: 20px;
+    color: rgb(47, 106, 194);
+    text-shadow: 1px 1px 1px rgba(4, 10, 30, 0.609), 2px 2px 5px rgb(0, 0, 0); /* Horizontal offset, vertical offset, blur radius, color */
   }
 
   &__character-selection {
@@ -123,9 +110,7 @@ main {
       background: none;
       height: 200px;
       width: auto;
-      filter: drop-shadow(
-        0 0 20px rgba(136, 158, 158, 0.487)
-      ); /* Add a drop shadow */
+      filter: drop-shadow(0 0 20px rgb(238, 238, 252)); /* Add a drop shadow */
     }
 
     &__left-arrow,
@@ -139,19 +124,11 @@ main {
       filter: drop-shadow(
         0 0 20px rgba(136, 158, 158, 0.487)
       ); /* Add a drop shadow */
+      &:hover {
+        transform: scale(1.5);
+        transition: 1s;
+      }
     }
-  }
-
-  &__button {
-    font-size: $medium-font;
-    background-color: blanchedalmond;
-    width: 60%;
-    margin: auto;
-    padding: 5px;
-    border: 2px solid black;
-    text-align: center;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-      0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 }
 
@@ -195,13 +172,12 @@ main {
     font-size: $medium-font;
     align-items: center;
     font-size: $small-font;
+    padding: 30px;
 
     &__img {
       height: auto;
-      width: 100px;
-      filter: drop-shadow(
-        0 0 20px rgba(136, 158, 158, 0.487)
-      ); /* Add a drop shadow */
+      width: 120px;
+      filter: drop-shadow(0 0 20px rgba(136, 158, 158, 0.487));
     }
   }
 
@@ -209,28 +185,47 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
+
     &__atk,
     &__rest,
     &__heal {
       font-size: $small-font;
       padding: 10px;
       margin: auto;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0px 20px 40px 0 rgb(0, 0, 0);
       color: white;
       border-radius: 50px;
     }
 
     &__atk {
       background-color: rgba(222, 97, 97, 0.5);
+      &:hover {
+        background-color: rgba(241, 14, 14, 0.801);
+        transform: scale(1.15);
+        transition: 1s;
+      }
     }
 
     &__rest {
       background-color: rgba(45, 45, 165, 0.5);
+      padding-left: 15px;
+      padding-right: 15px;
+      &:hover {
+        background-color: rgba(25, 25, 219, 0.801);
+        transform: scale(1.15);
+        transition: 1s;
+      }
     }
 
     &__heal {
       background-color: rgba(42, 140, 42, 0.5);
+      padding-left: 15px;
+      padding-right: 15px;
+      &:hover {
+        background-color: rgba(41, 199, 41, 0.801);
+        transform: scale(1.15);
+        transition: 1s;
+      }
     }
   }
 }
@@ -240,16 +235,24 @@ main {
   flex-direction: column;
   font-size: $small-font;
   align-items: center;
+  justify-content: space-evenly;
   justify-self: center;
+
+  &__stats {
+    padding-bottom: 40px;
+  }
 
   &__info {
     display: flex;
     flex-direction: column;
     font-size: $small-font;
-    align-items: center;
-    justify-self: center;
+    align-items: stretch;
 
     &__img {
+      width: 150px;
+      height: auto;
+      padding-top: 20px;
+      padding-bottom: 40px;
       filter: drop-shadow(
         0 0 20px rgba(178, 7, 32, 0.956)
       ); /* Add a drop shadow */
@@ -258,3 +261,57 @@ main {
 }
 
 // end screen styling needs to be done too
+
+.game-over-screen,
+.end-game-win-screen {
+  font-size: $large-font;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(4, 10, 30, 0.609), 2px 2px 5px rgb(0, 0, 0); /* Horizontal offset, vertical offset, blur radius, color */
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+
+  &__content {
+    font-size: $small-font;
+    color: rgb(233, 23, 23);
+  }
+
+  &__img {
+    width: 120px;
+    height: auto;
+    padding: 10px;
+    filter: grayscale(100) drop-shadow(0 0 20px rgb(248, 0, 33));
+  }
+}
+
+.end-game-win-screen {
+
+  &__content {
+    color: white;
+  }
+  &__img {
+
+    filter: drop-shadow(0 0 20px rgb(238, 221, 223));
+  }
+}
+
+// universal button
+
+.button {
+  font-size: $large-font;
+  background-color: rgba(30, 18, 78, 0.664);
+  border: none;
+  border-radius: 50px;
+  color: #f1f2ec;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0px 30px 50px 0 rgb(0, 0, 0);
+
+  &:hover {
+    background-color: rgba(192, 218, 59, 0.76);
+    color: #011d33;
+    transform: scale(1.15);
+    transition: 1s;
+  }
+}

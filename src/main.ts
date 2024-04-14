@@ -221,6 +221,7 @@ const handleGameRestart = () => {
   characterScore.innerHTML = `Health: ${player1.score}`;
   enemyName.innerHTML = `${currentEnemy.name}`;
   currentEnemy.hp = 400;
+  enemyHealth.innerHTML = `${currentEnemy.hp}`;
   enemyImg.src = currentEnemy.img;
 
   // screen transitions
