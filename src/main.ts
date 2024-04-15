@@ -5,7 +5,7 @@ import "../styles/style.scss";
 // --------------- QUERY SELECTORS ---------- //
 
 // FOR LOADING SCREEN:
-
+const loadingGif = document.querySelector(".loading-gif");
 const loadingScreen = document.querySelector(".loading-screen");
 const selectionScreen = document.querySelector(".selection-screen");
 const gameScreen = document.querySelector(".game-screen");
@@ -38,10 +38,18 @@ const submitChoicesButton = document.querySelector<HTMLButtonElement>(
 const enemyHealth = document.querySelector(".enemy__stats__hp");
 const enemyImg = document.querySelector<HTMLImageElement>(".enemy__info__img");
 const enemyName = document.querySelector(".enemy__info__name");
-const characterAttack = document.querySelector<HTMLButtonElement>(".character__actions__atk");
-const characterRest = document.querySelector<HTMLButtonElement>(".character__actions__rest");
-const characterHeal = document.querySelector<HTMLButtonElement>(".character__actions__heal");
-const characterImg = document.querySelector<HTMLImageElement>(".character__info__img");
+const characterAttack = document.querySelector<HTMLButtonElement>(
+  ".character__actions__atk"
+);
+const characterRest = document.querySelector<HTMLButtonElement>(
+  ".character__actions__rest"
+);
+const characterHeal = document.querySelector<HTMLButtonElement>(
+  ".character__actions__heal"
+);
+const characterImg = document.querySelector<HTMLImageElement>(
+  ".character__info__img"
+);
 const characterName = document.querySelector(".character__info__name");
 const feedback = document.querySelector(".game-screen__feedback");
 // FOR END GAME SCREENS
@@ -97,7 +105,8 @@ if (
   !endGameWinContent ||
   !endGameWinImg ||
   !endGameWinScreenButton ||
-  !feedback
+  !feedback ||
+  !loadingGif
 ) {
   throw new Error("Issue with selectors");
 }
@@ -108,7 +117,7 @@ characterHealth.innerHTML = `Health: ${player1.hp}`;
 characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
 characterScore.innerHTML = `Score: ${player1.score}`;
 
-// setting enemy variables 
+// setting enemy variables
 let currentEnemyIndex = 0;
 let currentEnemy: Enemy = enemyData[currentEnemyIndex];
 
@@ -117,6 +126,15 @@ enemyName.innerHTML = `${currentEnemy.name}`;
 enemyImg.src = currentEnemy.img;
 
 // ---------------- EVENT HANDLERS ----------- //
+
+const showMainContent = () => {
+    setTimeout(() => {
+      loadingGif.classList.add("hide");
+    
+      loadingScreen.classList.remove("hide");
+      loadingScreen.classList.add("show");
+    }, 4000);
+};
 
 // FOR SELECTION SCREEN
 
@@ -394,6 +412,7 @@ const gameOver = () => {
 // ---------------- EVENT LISTENERS ---------- //
 
 // FOR LOADING SCREEN
+window.addEventListener("load", showMainContent);
 loadingScreenEnterBtn.addEventListener("click", loadSelectionScreen);
 
 // FOR SELECTION SCREEN
