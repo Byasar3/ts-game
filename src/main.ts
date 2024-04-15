@@ -328,6 +328,15 @@ const getRandomNumber = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+const showFeedback = (message: string, duration: number) => {
+  feedback.textContent = message;
+
+  // JS function that will execute a block of code after delay
+  setTimeout(() => {
+    feedback.textContent = "";
+  }, duration);
+};
+
 const enemyAttack = () => {
   // 1. again random number generated
   const enemyAttackAmount = getRandomNumber(50, 150);
@@ -338,15 +347,6 @@ const enemyAttack = () => {
     `${currentEnemy.name} attacked you, causing ${enemyAttackAmount} damage!`,
     2000
   );
-};
-
-const showFeedback = (message: string, duration: number) => {
-  feedback.textContent = message;
-
-  // JS function that will execute a block of code after delay
-  setTimeout(() => {
-    feedback.textContent = "";
-  }, duration);
 };
 
 const isEnemyDefeated = () => {
@@ -403,7 +403,7 @@ const gameOver = () => {
   gameScreen.classList.remove("show");
   gameScreen.classList.add("hide");
 
-  // is already there but is still showing?
+  // hide game win end screen
   endGameWinScreen.classList.add("hide");
 
   // show game over screen
@@ -418,6 +418,7 @@ const gameOver = () => {
     Score: ${player1.score}
     `;
 };
+
 // ---------------- EVENT LISTENERS ---------- //
 
 // FOR LOADING SCREEN
@@ -425,21 +426,15 @@ loadingScreenEnterBtn.addEventListener("click", loadSelectionScreen);
 
 // FOR SELECTION SCREEN
 selectionScreenBtn.addEventListener("click", loadGameScreen);
-
 nameInputBox.addEventListener("change", handleNameInput);
-
 submitChoicesButton.addEventListener("click", handleUserInputs);
-
 leftArrow.addEventListener("click", handleLeftArrowClick);
-
 rightArrow.addEventListener("click", handleRightArrowClick);
 
 // FOR GAME SCREEN
 
 characterAttack.addEventListener("click", handleCharacterAttack);
-
 characterRest.addEventListener("click", handleCharacterRest);
-
 characterHeal.addEventListener("click", handleCharacterHeal);
 
 // FOR END GAME SCREENS
