@@ -38,20 +38,12 @@ const submitChoicesButton = document.querySelector<HTMLButtonElement>(
 const enemyHealth = document.querySelector(".enemy__stats__hp");
 const enemyImg = document.querySelector<HTMLImageElement>(".enemy__info__img");
 const enemyName = document.querySelector(".enemy__info__name");
-const characterAttack = document.querySelector<HTMLButtonElement>(
-  ".character__actions__atk"
-);
-const characterRest = document.querySelector<HTMLButtonElement>(
-  ".character__actions__rest"
-);
-const characterHeal = document.querySelector<HTMLButtonElement>(
-  ".character__actions__heal"
-);
-const characterImg = document.querySelector<HTMLImageElement>(
-  ".character__info__img"
-);
+const characterAttack = document.querySelector<HTMLButtonElement>(".character__actions__atk");
+const characterRest = document.querySelector<HTMLButtonElement>(".character__actions__rest");
+const characterHeal = document.querySelector<HTMLButtonElement>(".character__actions__heal");
+const characterImg = document.querySelector<HTMLImageElement>(".character__info__img");
 const characterName = document.querySelector(".character__info__name");
-const feedback = document.querySelector(".game-screen__feeback");
+const feedback = document.querySelector(".game-screen__feedback");
 // FOR END GAME SCREENS
 
 const endGameWinScreen = document.querySelector(".end-game-win-screen");
@@ -111,26 +103,24 @@ if (
 }
 
 // ---------------- VARIABLES ------------------//
+// setting character variables
 characterHealth.innerHTML = `Health: ${player1.hp}`;
-
 characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
-
 characterScore.innerHTML = `Score: ${player1.score}`;
 
-//note: might be able to do this by just characterThing.innerhtml = ${player1.thing}
-
+// setting enemy variables 
 let currentEnemyIndex = 0;
 let currentEnemy: Enemy = enemyData[currentEnemyIndex];
 
 enemyHealth.innerHTML = `Health: ${currentEnemy.hp}`;
-
 enemyName.innerHTML = `${currentEnemy.name}`;
-
 enemyImg.src = currentEnemy.img;
 
 // ---------------- EVENT HANDLERS ----------- //
 
 // FOR SELECTION SCREEN
+
+// for clicking through characters on screen
 let currentIndex = 0;
 const handleLeftArrowClick = () => {
   currentIndex =
@@ -143,12 +133,14 @@ const handleRightArrowClick = () => {
   showCurrentImage();
 };
 
-const handleUserInputs = () => {
+// saves the chosen image as the character image
+const handleUserCharacterSelection = () => {
   const currentImage = characterImages[currentIndex] as HTMLImageElement;
   player1.img = currentImage.src;
   characterImg.src = player1.img;
 };
 
+// saves written name as character name
 const handleNameInput = (event: Event) => {
   const target = (event.target as HTMLInputElement).value;
   player1.name = target;
@@ -157,28 +149,12 @@ const handleNameInput = (event: Event) => {
 
 // FOR GAME SCREEN
 
-const disableCharacterActionButtons = () => {
-  // disable buttons
-  characterAttack.disabled = true;
-  characterRest.disabled = true;
-  characterHeal.disabled = true;
-};
-
-const enableCharacterActionButtons = () => {
-  // enable buttons
-  setTimeout(() => {
-    characterAttack.disabled = false;
-    characterRest.disabled = false;
-    characterHeal.disabled = false;
-  }, 4000);
-};
-
 const handleCharacterAttack = () => {
   disableCharacterActionButtons();
   if (player1.stamina >= 20) {
     characterAttack.disabled = true;
-    // 1. a random number atk will be generated (outside function)
-    const characterAttackAmount = getRandomNumber(80, 170);
+    // 1. a random number atk will be generated
+    const characterAttackAmount = getRandomNumber(80, 200);
     // 2. that number will be taken away from the enemy's hp, updating new hp
     currentEnemy.hp -= characterAttackAmount;
     enemyHealth.innerHTML = `Health: ${currentEnemy.hp}`;
@@ -189,30 +165,29 @@ const handleCharacterAttack = () => {
       `You attacked ${currentEnemy.name}, causing ${characterAttackAmount} damage!`,
       2000
     );
-    // 4. need to check if enemy is alive or not (outside function)
+    // 4. need to check if enemy is alive or not
     isEnemyDefeated();
-    // 5. will trigger enemy attack (outside function)
+    // 5. will trigger enemy attack
     setTimeout(enemyAttack, 2500);
-    // need to check if character is alive or not (outside function)
+    // need to check if character is alive or not
     setTimeout(isCharacterDefeated, 2800);
   } else {
     showFeedback("Not enough stamina! Rest to increase stamina", 2000);
-    // but want to print this out to user, maybe innerhtml??
   }
   enableCharacterActionButtons();
 };
 
 const handleCharacterRest = () => {
   disableCharacterActionButtons();
-  // 1. a random number rest will be generated (outside function)
-  const randomStaminaRestore = getRandomNumber(15, 60);
+  // 1. a random number rest will be generated
+  const randomStaminaRestore = getRandomNumber(40, 80);
   // 2. that number will be added to character's stamina, updating new stamina
   player1.stamina += randomStaminaRestore;
   characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
   showFeedback(`You restored ${randomStaminaRestore} stamina!`, 2000);
-  // 3. will trigger enemy attack (outside function)
+  // 3. will trigger enemy attack
   setTimeout(enemyAttack, 2500);
-  // need to check if character is alive or not (outside function)
+  // need to check if character is alive or not
   setTimeout(isCharacterDefeated, 2800);
   enableCharacterActionButtons();
 };
@@ -220,8 +195,8 @@ const handleCharacterRest = () => {
 const handleCharacterHeal = () => {
   disableCharacterActionButtons();
   if (player1.stamina >= 50) {
-    // 1. a random number heal will be generated (outside function)
-    const randomHealRestore = getRandomNumber(150, 300);
+    // 1. a random number heal will be generated
+    const randomHealRestore = getRandomNumber(200, 300);
     // 2. that number will be added to characters health, updating new health
     player1.hp += randomHealRestore;
     characterHealth.innerHTML = `Health: ${player1.hp}`;
@@ -229,9 +204,9 @@ const handleCharacterHeal = () => {
     player1.stamina -= 50;
     characterStamina.innerHTML = `Stamina: ${player1.stamina}`;
     showFeedback(`You healed ${randomHealRestore}!`, 2000);
-    // 3. will trigger enemy attack (outside function)
+    // 3. will trigger enemy attack
     setTimeout(enemyAttack, 2500);
-    // need to check if character is alive or not (outside function)
+    // need to check if character is alive or not
     setTimeout(isCharacterDefeated, 2800);
   } else {
     showFeedback("Not enough stamina! Rest to increase stamina", 2000);
@@ -272,6 +247,22 @@ const handleGameRestart = () => {
 
 // ---------------- FUNCTIONS ----------------- /
 
+const disableCharacterActionButtons = () => {
+  // disable buttons
+  characterAttack.disabled = true;
+  characterRest.disabled = true;
+  characterHeal.disabled = true;
+};
+
+const enableCharacterActionButtons = () => {
+  // enable buttons
+  setTimeout(() => {
+    characterAttack.disabled = false;
+    characterRest.disabled = false;
+    characterHeal.disabled = false;
+  }, 5000);
+};
+
 // clicking through images
 const showCurrentImage = () => {
   characterImages.forEach((image, index) => {
@@ -307,7 +298,7 @@ const loadGameScreen = () => {
   gameScreen.classList.add("show");
 };
 
-// game function:
+////// game functions:
 
 const getRandomNumber = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -335,8 +326,6 @@ const showFeedback = (message: string, duration: number) => {
 };
 
 const isEnemyDefeated = () => {
-  // if statement to check if enemy alive or not
-  // if false ie
   if (currentEnemy.hp <= 0) {
     currentEnemyIndex++;
     // checking if any monsters left
@@ -346,7 +335,7 @@ const isEnemyDefeated = () => {
       enemyHealth.innerHTML = `Health: ${currentEnemy.hp}`;
       enemyName.innerHTML = `${currentEnemy.name}`;
       enemyImg.src = currentEnemy.img;
-      // give character a score (theres no function for this, maybe hard code a variable?)
+      // give character a score (theres no function for this, hard code a variable)
       player1.score += 100;
       characterScore.innerHTML = `Score: ${player1.score}`;
     } else {
@@ -354,19 +343,18 @@ const isEnemyDefeated = () => {
       userReachesEndGameWin();
     }
   }
-  // 2. give some sort of "wow you won, next level message" ----- will work on that as extension
+  // 2. give some sort of "wow you won, next level message" ----- extension
 };
 
 const isCharacterDefeated = () => {
   // if statement to check character hp
   if (player1.hp <= 0) {
+    // no hp left triggers game over logic
     gameOver();
   }
 };
 
 const userReachesEndGameWin = () => {
-  // when the new data array reaches it's end!! handled in is enemy defeated logic
-
   // hide game screen
   gameScreen.classList.remove("show");
   gameScreen.classList.add("hide");
@@ -396,7 +384,6 @@ const gameOver = () => {
   gameOverScreen.classList.add("show");
 
   gameOverImg.src = player1.img;
-
   gameOverContent.innerHTML = `
     Health: ${player1.hp}
     Stamina: ${player1.stamina}
@@ -412,7 +399,7 @@ loadingScreenEnterBtn.addEventListener("click", loadSelectionScreen);
 // FOR SELECTION SCREEN
 selectionScreenBtn.addEventListener("click", loadGameScreen);
 nameInputBox.addEventListener("change", handleNameInput);
-submitChoicesButton.addEventListener("click", handleUserInputs);
+submitChoicesButton.addEventListener("click", handleUserCharacterSelection);
 leftArrow.addEventListener("click", handleLeftArrowClick);
 rightArrow.addEventListener("click", handleRightArrowClick);
 
