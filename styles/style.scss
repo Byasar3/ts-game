@@ -52,15 +52,15 @@ main {
     margin: 50px;
     text-align: center;
     color: rgb(20, 8, 66);
-    text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.799), 0px 0px 50px white; /* Horizontal offset, vertical offset, blur radius, color */
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.799), 0px 0px 50px white; /* Horizontal offset, vertical offset, blur radius, color */
   }
 
   &__description, &__instructions {
     font-size: $large-font;
     margin: 50px;
     text-align: center;
-    color: #f5eec9;
-    text-shadow: 1px 1px 1px rgba(4, 10, 30, 0.609), 2px 2px 25px black; /* Horizontal offset, vertical offset, blur radius, color */
+    color: #c55307;
+    text-shadow: 0px 0px 40px rgb(0, 0, 0), 2px 2px 2px rgb(48, 5, 5);
   }
 }
 
@@ -209,7 +209,7 @@ main {
     &__rest,
     &__heal {
       font-size: $small-font;
-      padding: 10px;
+      padding: 5px;
       margin: auto;
       box-shadow: 0px 20px 40px 0 rgb(0, 0, 0);
       color: white;
@@ -332,5 +332,47 @@ main {
     color: #011d33;
     transform: scale(1.15);
     transition: 1s;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+
+  .game-screen {
+    justify-content: space-around;
+    font-size: $large-font;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .character {
+    font-size: $large-font;
+
+    &__stats{
+      font-size: $large-font;
+    }
+    &__img {
+      height: auto;
+      width: 200px;
+    }
+
+    &__actions {
+      &__atk,
+      &__rest,
+      &__heal {
+        font-size: $large-font;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: auto;
+      }
+    }
+  }
+
+  .enemy {
+        font-size: $large-font;
+    &__img {
+      height: auto;
+      width: 200px;
+    }
   }
 }
