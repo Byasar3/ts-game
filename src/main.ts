@@ -324,7 +324,7 @@ const getRandomNumber = (min: number, max: number): number => {
 
 const enemyAttack = () => {
   // 1. again random number generated
-  const enemyAttackAmount = getRandomNumber(50, 150);
+  const enemyAttackAmount = getRandomNumber(50, 80);
   // 2. that random number is taken from character's health, updating new health
   player1.hp -= enemyAttackAmount;
   characterHealth.innerHTML = `Health: ${player1.hp}`;
