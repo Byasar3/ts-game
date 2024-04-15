@@ -45,6 +45,7 @@ main {
 .loading-screen {
   flex-direction: column;
   padding-bottom: 20%;
+  background-image: url(../assets/loading-page-clouds.jpg);
 
   &__heading {
     font-size: $extra-large-font;
