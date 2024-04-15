@@ -350,9 +350,11 @@ const isEnemyDefeated = () => {
     if (currentEnemyIndex < enemyData.length) {
       currentEnemy = enemyData[currentEnemyIndex];
       // update with new enemy information -> set current enemy to next enemy
+      currentEnemy.hp = 400;
       enemyHealth.innerHTML = `Health: ${currentEnemy.hp}`;
       enemyName.innerHTML = `${currentEnemy.name}`;
       enemyImg.src = currentEnemy.img;
+
       // give character a score (theres no function for this, hard code a variable)
       player1.score += 100;
       characterScore.innerHTML = `Score: ${player1.score}`;
