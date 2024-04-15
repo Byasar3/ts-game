@@ -15,7 +15,7 @@
 I started project by planning what sort of game I wanted, what the layout would be and any possible functionality and features of the game.
 
 Here is a rough sketch, using Excalidraw, of my initial idea:
-![alt text](image.png)
+![project plan](image-1.png)
 </p>
 
 ### How to play
@@ -24,7 +24,7 @@ Here is a rough sketch, using Excalidraw, of my initial idea:
 
 <p> Head over to https://byasar3.github.io/ts-game/ to play the game! </p>
 
-### 💻 Tech Stack :
+### Tech Stack :
 
 ---
 
@@ -33,3 +33,10 @@ Here is a rough sketch, using Excalidraw, of my initial idea:
 - HTML
 - SASS/SCSS
 
+### Credit and big thanks to:
+
+---
+[Loading gif](https://gifer.com/en/KL6q) <br/>
+[Background image](https://pikbest.com/backgrounds/retro-cyberpunk-style-80s-game-scene-pixel-art-8-bit-sci-fi-background_1772422.html)<br/>
+Sprites:<br/>
+[Monsters](https://www.deviantart.com/warpentak-prime/art/pixel-monsters-331970819)<br/>
