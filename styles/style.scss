@@ -44,18 +44,18 @@ main {
 
 .loading-screen {
   flex-direction: column;
-  padding-bottom: 200px;
+  padding-bottom: 20%;
 
   &__heading {
-    font-size: $large-font;
+    font-size: $extra-large-font;
     margin: 50px;
     text-align: center;
     color: rgb(20, 8, 66);
     text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.799), 0px 0px 50px white; /* Horizontal offset, vertical offset, blur radius, color */
   }
 
-  &__description {
-    font-size: $medium-font;
+  &__description, &__instructions {
+    font-size: $large-font;
     margin: 50px;
     text-align: center;
     color: #f5eec9;
